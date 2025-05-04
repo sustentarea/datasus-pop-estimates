@@ -26,7 +26,7 @@ A backup copy of the raw data is also available in OSF. You can access it [here]
 
 ### Source of Data
 
-The data used in this report were sourced from the [DATASUS](https://datasus.saude.gov.br/) platform, which provides annual population estimates for Brazil by municipality, age, and sex for the period 2000–2024 [@datasus2025]. These estimates are produced using data by the Brazilian Institute of Geography and Statistics ([IBGE](https://www.ibge.gov.br/)).
+The data used in this report were sourced from the [DATASUS](https://datasus.saude.gov.br/) platform, which provides annual population estimates for Brazil by municipality, age, and sex for the period 2000–2024 [@datasusb]. These estimates are produced using data by the Brazilian Institute of Geography and Statistics ([IBGE](https://www.ibge.gov.br/)).
 
 For technical information about the raw dataset, see the official [technical note](http://tabnet.datasus.gov.br/cgi/IBGE/NT-POPULACAO-RESIDENTE-2000-2024.PDF) (in Portuguese).
 

@@ -9,7 +9,7 @@ DOI](https://img.shields.io/badge/OSF-10.17605/OSF.IO/UCMS6-1284C5.svg)](https:/
 
 ## Overview
 
-This repository provides a reproducible pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., 2025](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions.
+This repository provides a reproducible pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., n.d.](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions.
 
 You can access the pipeline [here](https://sustentarea.github.io/datasus-pop-estimates/).
 
