@@ -39,7 +39,7 @@
     "href": "index.html#downloading-the-data",
     "title": "",
     "section": "Downloading the Data",
-    "text": "Downloading the Data\n\nCodeif (!dir.exists(here::here(\"data\"))) dir.create(\"data\")\n\n\n\nraw_file_pattern &lt;- paste0(\"raw-\", year)\n\n\nfile &lt;- here::here(\"data\", paste0(raw_file_pattern, \".zip\"))\n\nreq &lt;-\n  paste0(\n    \"ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR\",\n    year |&gt; stringr::str_sub(start= -2),\n    \".zip\"\n  ) |&gt;\n  httr2::request() |&gt;\n  httr2::req_progress() |&gt;\n  httr2::req_perform(file)"
+    "text": "Downloading the Data\n\nCodeif (!dir.exists(here::here(\"data\"))) dir.create(\"data\")\n\n\n\nraw_file_pattern &lt;- paste0(\"raw-\", year)\n\n\nfile &lt;- here::here(\"data\", paste0(raw_file_pattern, \".zip\"))\n\npaste0(\n  \"ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR\",\n  year |&gt; stringr::str_sub(start= -2),\n  \".zip\"\n) |&gt;\n  httr2::request() |&gt;\n  httr2::req_progress() |&gt;\n  httr2::req_perform(file)"
   },
   {
     "objectID": "index.html#unzipping-the-data",
@@ -103,6 +103,13 @@
     "title": "",
     "section": "Visualizing the Data",
     "text": "Visualizing the Data\n\nCodebrand_div_palette &lt;- function(x) {\n  brandr:::make_color_ramp(\n    n_prop = x,\n    colors = c(\n      brandr::get_brand_color(\"dark-red\"),\n      # brandr::get_brand_color(\"white\"),\n      brandr::get_brand_color_mix(\n        position = 950,\n        color_1 = \"dark-red\",\n        color_2 = \"dark-red-triadic-blue\",\n        alpha = 0.5\n      ),\n      brandr::get_brand_color(\"dark-red-triadic-blue\")\n    )\n  )\n}\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_hist(\n    col = \"n\",\n    density_line_color = \"red\",\n    x_label = \"Population estimate\",\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n\n\n\n\n\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_brazil_municipality(\n    col_fill = \"n\",\n    col_code = \"municipality_code\",\n    year = plotr:::get_closest_geobr_year(year, type = \"municipality\"),\n    comparable_areas = FALSE,\n    reverse = FALSE,\n    transform = \"log10\",\n    palette = brand_div_palette,\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n#&gt; ! The closest map year to 2024 is 2022. Using year 2022 instead.\n#&gt; Scale on map varies by more than 10%, scale bar may be inaccurate"
+  },
+  {
+    "objectID": "index.html#acknowledgments",
+    "href": "index.html#acknowledgments",
+    "title": "",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\n\nThis work is part of the Sustentarea Research and Extension Group’s project: Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil’s public health system (SUS).\n\nThis work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brazil (CNPq)."
   },
   {
     "objectID": "index.html#how-to-cite",

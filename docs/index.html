@@ -182,6 +182,7 @@ div.csl-indent {
   </ul>
 </li>
   <li><a href="#visualizing-the-data" id="toc-visualizing-the-data" class="nav-link" data-scroll-target="#visualizing-the-data">Visualizing the Data</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   <li><a href="#how-to-cite" id="toc-how-to-cite" class="nav-link" data-scroll-target="#how-to-cite">How to Cite</a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -275,12 +276,11 @@ Figure&nbsp;1: Data science workflow created by Wickham, Çetinkaya-Runde, and G
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">raw_file_pattern</span>, <span class="st">".zip"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">req</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
-<span>    <span class="st">"ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR"</span>,</span>
-<span>    <span class="va">year</span> <span class="op">|&gt;</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span>start<span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>    <span class="st">".zip"</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR"</span>,</span>
+<span>  <span class="va">year</span> <span class="op">|&gt;</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span>start<span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>  <span class="st">".zip"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/request.html">request</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/req_progress.html">req_progress</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html">req_perform</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -601,6 +601,11 @@ Figure&nbsp;1: Data science workflow created by Wickham, Çetinkaya-Runde, and G
 </div>
 </div>
 </div>
+</section><section id="acknowledgments" class="level2"><h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
+<p><a href="images/sustentarea-icon.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/sustentarea-icon.svg" class="img-fluid" style="width: 15%;"></a></p>
+<p>This work is part of the <a href="https://www.fsp.usp.br/sustentarea">Sustentarea</a> Research and Extension Group’s project: <em>Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil’s public health system (SUS)</em>.</p>
+<p><a href="images/cnpq-logo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/cnpq-logo.svg" class="img-fluid" style="width: 25%;"></a></p>
+<p>This work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brazil (<a href="https://www.gov.br/cnpq/">CNPq</a>).</p>
 </section><section id="how-to-cite" class="level2"><h2 class="anchored" data-anchor-id="how-to-cite">How to Cite</h2>
 <p>To cite this work, please use the following format:</p>
 <p>Vartanian, D., &amp; Carvalho, A. M. (2025). <em>A reproducible pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)</em> [Report]. Sustentarea Research and Extension Group at the University of São Paulo. <a href="https://sustentarea.github.io/datasus-pop-estimates" class="uri">https://sustentarea.github.io/datasus-pop-estimates</a></p>

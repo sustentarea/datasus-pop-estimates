@@ -21,7 +21,7 @@ A backup copy of the raw data is also available in OSF. You can access it [here]
 
 ## How to Use
 
-The pipeline provided in this report is fully reproducible. It was developed using the [Quarto](https://quarto.org/) publishing system and the [R programming language](https://www.r-project.org/). To ensure consistent results, the [`renv`](https://rstudio.github.io/renv/) package is used to manage and restore the R environment (see `renv.lock` for details).
+The pipeline is fully reproducible. It was developed using the [Quarto](https://quarto.org/) publishing system and the [R programming language](https://www.r-project.org/). To ensure consistent results, the [`renv`](https://rstudio.github.io/renv/) package is used to manage and restore the R environment (see `renv.lock` for details).
 
 After installing the three dependencies mentioned above, follow these steps to reproduce the analyses:
 

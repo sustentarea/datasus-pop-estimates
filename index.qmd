@@ -104,15 +104,15 @@ raw_file_pattern <- paste0("raw-", year)
 
 ```{r}
 #| code-fold: false
+#| output: false
 
 file <- here::here("data", paste0(raw_file_pattern, ".zip"))
 
-req <-
-  paste0(
-    "ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR",
-    year |> stringr::str_sub(start= -2),
-    ".zip"
-  ) |>
+paste0(
+  "ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR",
+  year |> stringr::str_sub(start= -2),
+  ".zip"
+) |>
   httr2::request() |>
   httr2::req_progress() |>
   httr2::req_perform(file)
@@ -448,6 +448,16 @@ data |>
 
 grDevices::dev.off()
 ```
+
+## Acknowledgments
+
+![](images/sustentarea-icon.svg){style="width: 15%;"}
+
+This work is part of the [Sustentarea](https://www.fsp.usp.br/sustentarea) Research and Extension Group's project: *Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil's public health system (SUS)*.
+
+![](images/cnpq-logo.svg){style="width: 25%;"}
+
+This work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brazil ([CNPq](https://www.gov.br/cnpq/)).
 
 ## How to Cite
 
