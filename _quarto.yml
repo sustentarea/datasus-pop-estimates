@@ -15,7 +15,7 @@ title: >
   by Municipality, Age, and Sex in Brazil (2000-2024)
 author: "Daniel Vartanian & Aline Martins de Carvalho"
 keyword: >
-  pipeline, population estimates, data munging, data science, rstats,
+  pipelines, population estimates, data munging, data science, rstats,
   open data, open science, datasus, ibge, brazil
 date: today
 date-format: "YYYY-MM-DD"
@@ -38,7 +38,7 @@ website:
     background: "#272B33"
     right:
       - icon: github
-        href: https://sustentarea.github.io/datasus-pop-estimates/
+        href: https://github.com/sustentarea/datasus-pop-estimates/
         aria-label: GitHub
 
 lightbox:
