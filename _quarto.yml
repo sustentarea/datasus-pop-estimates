@@ -11,7 +11,7 @@ project:
   post-render: "R/_post-render.R"
 
 title: >
-  A Reproducible R Pipeline for Processing DATASUS Annual Population Estimates
+  A Reproducible Pipeline for Processing DATASUS Annual Population Estimates
   by Municipality, Age, and Sex in Brazil (2000-2024)
 author: "Daniel Vartanian & Aline Martins de Carvalho"
 keyword: >

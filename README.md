@@ -9,7 +9,7 @@ DOI](https://img.shields.io/badge/OSF-10.17605/OSF.IO/UCMS6-1284C5.svg)](https:/
 
 ## Overview
 
-This repository provides a reproducible R pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., 2025](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions.
+This repository provides a reproducible pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., 2025](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions.
 
 You can access the pipeline [here](https://sustentarea.github.io/datasus-pop-estimates/).
 
@@ -34,13 +34,13 @@ After installing the three dependencies mentioned above, follow these steps to r
 
 To cite this work, please use the following format:
 
-Vartanian, D., & Carvalho, A. M. (2025). *A reproducible R pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)* \[Report\]. Sustentarea Research and Extension Group at the University of São Paulo. <https://sustentarea.github.io/datasus-pop-estimates>
+Vartanian, D., & Carvalho, A. M. (2025). *A reproducible pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)* \[Report\]. Sustentarea Research and Extension Group at the University of São Paulo. <https://sustentarea.github.io/datasus-pop-estimates>
 
 A BibTeX entry for LaTeX users is
 
 ```
 @techreport{vartanian2025,
-  title = {A reproducible R pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)},
+  title = {A reproducible pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)},
   author = {{Daniel Vartanian} and {Aline Martins de Carvalho}},
   year = {2025},
   address = {São Paulo},
