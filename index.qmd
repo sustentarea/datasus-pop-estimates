@@ -50,7 +50,7 @@ The Tidyverse [code style guide](https://style.tidyverse.org/) and [design princ
 
 ### Reproducibility
 
-The pipeline is fully reproducible and can be run again at any time. See the [README](hhttps://github.com/danielvartan/datasus-pop-estimates/blob/main/README.md) file in the code repository to learn how to run them.
+The pipeline is fully reproducible and can be run again at any time. See the [README](https://github.com/danielvartan/datasus-pop-estimates/blob/main/README.md) file in the code repository to learn how to run them.
 
 ## Setting the Environment
 
@@ -293,7 +293,6 @@ metadata <-
     )
   ) |>
   labelled::generate_dictionary(details = "full") |>
-  # labelled::lookfor_to_long_format() |>
   labelled::convert_list_columns_to_character()
 ```
 
@@ -485,7 +484,7 @@ A BibTeX entry for LaTeX users is
 [![](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 :::
 
-The content is licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/), placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution.
+This content is licensed under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/), placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution.
 
 ## References {.unnumbered}
 

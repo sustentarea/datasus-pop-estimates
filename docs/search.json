@@ -88,7 +88,7 @@
     "href": "index.html#data-dictionary",
     "title": "",
     "section": "Data Dictionary",
-    "text": "Data Dictionary\n\nCodemetadata &lt;-\n  data |&gt;\n  labelled::`var_label&lt;-`(\n    list(\n      year = \"Year of the population estimate\",\n      region_code = \"IBGE code of the region\",\n      region = \"Name of the region\",\n      state_code = \"IBGE code of the state\",\n      state = \"Name of the state\",\n      federal_unit = \"Name of the federal unit\",\n      municipality_code = \"IBGE code of the municipality\",\n      municipality = \"Name of the municipality\",\n      sex = \"Sex of the population\",\n      age = \"Age of the population\",\n      n = \"Population estimate\"\n    )\n  ) |&gt;\n  labelled::generate_dictionary(details = \"full\") |&gt;\n  # labelled::lookfor_to_long_format() |&gt;\n  labelled::convert_list_columns_to_character()\n\n\n\nCodemetadata\n\n\n  \n\n\n\n\nCodedata"
+    "text": "Data Dictionary\n\nCodemetadata &lt;-\n  data |&gt;\n  labelled::`var_label&lt;-`(\n    list(\n      year = \"Year of the population estimate\",\n      region_code = \"IBGE code of the region\",\n      region = \"Name of the region\",\n      state_code = \"IBGE code of the state\",\n      state = \"Name of the state\",\n      federal_unit = \"Name of the federal unit\",\n      municipality_code = \"IBGE code of the municipality\",\n      municipality = \"Name of the municipality\",\n      sex = \"Sex of the population\",\n      age = \"Age of the population\",\n      n = \"Population estimate\"\n    )\n  ) |&gt;\n  labelled::generate_dictionary(details = \"full\") |&gt;\n  labelled::convert_list_columns_to_character()\n\n\n\nCodemetadata\n\n\n  \n\n\n\n\nCodedata"
   },
   {
     "objectID": "index.html#saving-the-valid-data",
@@ -123,7 +123,7 @@
     "href": "index.html#license",
     "title": "",
     "section": "License",
-    "text": "License\n\n\n\nThe content is licensed under CC0 1.0 Universal, placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution."
+    "text": "License\n\n\n\nThis content is licensed under CC0 1.0 Universal, placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution."
   },
   {
     "objectID": "index.html#references",
