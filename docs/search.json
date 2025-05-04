@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "",
+    "section": "Overview",
+    "text": "Overview\nThis report provides a reproducible R pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions."
+  },
+  {
+    "objectID": "index.html#data-availability",
+    "href": "index.html#data-availability",
+    "title": "",
+    "section": "Data Availability",
+    "text": "Data Availability\nThe processed data are available in both csv and rds formats via a dedicated repository on the Open Science Framework (OSF), accessible here. A metadata file is included alongside the validated data. You can also access these files directly from R using the osfr package.\nA backup copy of the raw data is also available in OSF. You can access it here."
+  },
+  {
+    "objectID": "index.html#methods",
+    "href": "index.html#methods",
+    "title": "",
+    "section": "Methods",
+    "text": "Methods\nSource of Data\nThe data used in this report were sourced from the DATASUS platform, which provides annual population estimates for Brazil by municipality, age, and sex for the period 2000–2024 (Comitê de Gestão de Indicadores et al., 2025). These estimates are produced using data by the Brazilian Institute of Geography and Statistics (IBGE).\nFor technical information about the raw dataset, see the official technical note (in Portuguese).\nData Munging\nThe data munging followed the data science workflow outlined by Wickham et al. (2023), as illustrated in Figure 1. All processes were made using the Quarto publishing system (Allaire et al., n.d.), the R programming language (R Core Team, n.d.) and several R packages.\nThe tidyverse and rOpenSci peer-reviewed package ecosystem and other R packages adherents of the tidy tools manifesto (Wickham, 2023) were prioritized. All processes were made in order to provide result transparency and reproducibility.\n\n\nFigure 1: Data science workflow created by Wickham, Çetinkaya-Runde, and Grolemund.\n\n\nSource: Reproduced from Wickham et al. (2023).\n\n\n\nCode Style\nThe Tidyverse code style guide and design principles were followed to ensure consistency and enhance readability.\nReproducibility\nThe pipeline is fully reproducible and can be run again at any time. See the README file in the code repository to learn how to run them."
+  },
+  {
+    "objectID": "index.html#setting-the-environment",
+    "href": "index.html#setting-the-environment",
+    "title": "",
+    "section": "Setting the Environment",
+    "text": "Setting the Environment\n\nlibrary(brandr)\nlibrary(cli)\nlibrary(dplyr)\nlibrary(foreign)\nlibrary(fs)\nlibrary(ggplot2)\nlibrary(here)\nlibrary(httr2)\nlibrary(janitor)\nlibrary(labelled)\nlibrary(orbis) # github.com/danielvartan/orbis\nlibrary(osfr)\nlibrary(plotr) # github.com/danielvartan/plotr\nlibrary(readr)\nlibrary(utils)"
+  },
+  {
+    "objectID": "index.html#setting-the-initial-variables",
+    "href": "index.html#setting-the-initial-variables",
+    "title": "",
+    "section": "Setting the Initial Variables",
+    "text": "Setting the Initial Variables\n\n\n\n\n\n\nIf you need data for additional years, simply run this pipeline within a loop over the desired years.\n\n\n\n\nyear &lt;- 2024"
+  },
+  {
+    "objectID": "index.html#downloading-the-data",
+    "href": "index.html#downloading-the-data",
+    "title": "",
+    "section": "Downloading the Data",
+    "text": "Downloading the Data\n\nCodeif (!dir.exists(here::here(\"data\"))) dir.create(\"data\")\n\n\n\nraw_file_pattern &lt;- paste0(\"raw-\", year)\n\n\nfile &lt;- here::here(\"data\", paste0(raw_file_pattern, \".zip\"))\n\nreq &lt;-\n  paste0(\n    \"ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR\",\n    year |&gt; stringr::str_sub(start= -2),\n    \".zip\"\n  ) |&gt;\n  httr2::request() |&gt;\n  httr2::req_progress() |&gt;\n  httr2::req_perform(file)"
+  },
+  {
+    "objectID": "index.html#unzipping-the-data",
+    "href": "index.html#unzipping-the-data",
+    "title": "",
+    "section": "Unzipping the Data",
+    "text": "Unzipping the Data\n\nCodefile &lt;-\n  file |&gt;\n  utils::unzip(exdir = here::here(\"data\"), overwrite = TRUE)\n\n\n\nCodefile &lt;-\n  file |&gt;\n  fs::file_move(here::here(\"data\", paste0(raw_file_pattern, \".csv\")))\n\n\n\nCodefs::file_delete(here::here(\"data\", paste0(raw_file_pattern, \".zip\")))"
+  },
+  {
+    "objectID": "index.html#reading-the-data",
+    "href": "index.html#reading-the-data",
+    "title": "",
+    "section": "Reading the Data",
+    "text": "Reading the Data\n\ndata &lt;-\n  file |&gt;\n  foreign::read.dbf() |&gt;\n  dplyr::as_tibble()\n\n\ndata |&gt; dplyr::glimpse()\n#&gt; Rows: 902,340\n#&gt; Columns: 5\n#&gt; $ COD_MUN &lt;fct&gt; 1100015, 1100015, 1100015, 1100015, 1100015, 1100015, 11000…\n#&gt; $ ANO     &lt;fct&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024,…\n#&gt; $ SEXO    &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n#&gt; $ IDADE   &lt;fct&gt; 000, 001, 002, 003, 004, 005, 006, 007, 008, 009, 010, 011,…\n#&gt; $ POP     &lt;int&gt; 158, 159, 161, 163, 168, 176, 176, 172, 174, 178, 176, 174,…"
+  },
+  {
+    "objectID": "index.html#renaming-the-data",
+    "href": "index.html#renaming-the-data",
+    "title": "",
+    "section": "Renaming the Data",
+    "text": "Renaming the Data\n\ndata &lt;-\n  data |&gt;\n  janitor::clean_names() |&gt;\n  dplyr::rename(\n    municipality_code = cod_mun,\n    year = ano,\n    sex = sexo,\n    age = idade,\n    n = pop\n  )\n\n\ndata |&gt; dplyr::glimpse()\n#&gt; Rows: 902,340\n#&gt; Columns: 5\n#&gt; $ municipality_code &lt;fct&gt; 1100015, 1100015, 1100015, 1100015, 1100015, 1100…\n#&gt; $ year              &lt;fct&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2…\n#&gt; $ sex               &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n#&gt; $ age               &lt;fct&gt; 000, 001, 002, 003, 004, 005, 006, 007, 008, 009,…\n#&gt; $ n                 &lt;int&gt; 158, 159, 161, 163, 168, 176, 176, 172, 174, 178,…"
+  },
+  {
+    "objectID": "index.html#tidying-the-data",
+    "href": "index.html#tidying-the-data",
+    "title": "",
+    "section": "Tidying the Data",
+    "text": "Tidying the Data\n\ndata &lt;-\n  data |&gt;\n  dplyr::mutate(\n    dplyr::across(\n      .cols = where(is.factor),\n      .fns = ~ .x |&gt; as.character() |&gt; as.integer()\n    )\n  ) |&gt;\n  dplyr::mutate(\n    sex = factor(\n      sex,\n      levels = 1:2,\n      labels = c(\"male\", \"female\"),\n      ordered = FALSE\n    )\n  )\n\n\ndata |&gt; dplyr::glimpse()\n#&gt; Rows: 902,340\n#&gt; Columns: 5\n#&gt; $ municipality_code &lt;int&gt; 1100015, 1100015, 1100015, 1100015, 1100015, 1100…\n#&gt; $ year              &lt;int&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2…\n#&gt; $ sex               &lt;fct&gt; male, male, male, male, male, male, male, male, m…\n#&gt; $ age               &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,…\n#&gt; $ n                 &lt;int&gt; 158, 159, 161, 163, 168, 176, 176, 172, 174, 178,…"
+  },
+  {
+    "objectID": "index.html#adding-state-and-region-data",
+    "href": "index.html#adding-state-and-region-data",
+    "title": "",
+    "section": "Adding State and Region Data",
+    "text": "Adding State and Region Data\n\nbrazil_municipalities &lt;- orbis::get_brazil_municipality(\n  year = plotr:::get_closest_geobr_year(year, type = \"municipality\")\n)\n#&gt; ! The closest map year to 2024 is 2022. Using year 2022 instead.\n\n\ndata &lt;-\n  data |&gt;\n  dplyr::left_join(\n    brazil_municipalities,\n    by = \"municipality_code\"\n  ) |&gt;\n  dplyr::relocate(\n    year,\n    region_code,\n    region,\n    state_code,\n    state,\n    federal_unit,\n    municipality_code,\n    municipality\n  )\n\n\ndata |&gt; dplyr::glimpse()\n#&gt; Rows: 902,340\n#&gt; Columns: 11\n#&gt; $ year              &lt;int&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2…\n#&gt; $ region_code       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n#&gt; $ region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"North\", \"Nor…\n#&gt; $ state_code        &lt;int&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 1…\n#&gt; $ state             &lt;chr&gt; \"Rondônia\", \"Rondônia\", \"Rondônia\", \"Rondônia\", \"…\n#&gt; $ federal_unit      &lt;chr&gt; \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"…\n#&gt; $ municipality_code &lt;int&gt; 1100015, 1100015, 1100015, 1100015, 1100015, 1100…\n#&gt; $ municipality      &lt;chr&gt; \"Alta Floresta D'Oeste\", \"Alta Floresta D'Oeste\",…\n#&gt; $ sex               &lt;fct&gt; male, male, male, male, male, male, male, male, m…\n#&gt; $ age               &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,…\n#&gt; $ n                 &lt;int&gt; 158, 159, 161, 163, 168, 176, 176, 172, 174, 178,…"
+  },
+  {
+    "objectID": "index.html#arranging-the-data",
+    "href": "index.html#arranging-the-data",
+    "title": "",
+    "section": "Arranging the Data",
+    "text": "Arranging the Data\n\ndata &lt;-\n  data |&gt;\n  dplyr::arrange(\n    year,\n    region_code,\n    state_code,\n    municipality_code,\n    sex,\n    age\n  )\n\n\ndata |&gt; dplyr::glimpse()\n#&gt; Rows: 902,340\n#&gt; Columns: 11\n#&gt; $ year              &lt;int&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2…\n#&gt; $ region_code       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n#&gt; $ region            &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"North\", \"Nor…\n#&gt; $ state_code        &lt;int&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 1…\n#&gt; $ state             &lt;chr&gt; \"Rondônia\", \"Rondônia\", \"Rondônia\", \"Rondônia\", \"…\n#&gt; $ federal_unit      &lt;chr&gt; \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"RO\", \"…\n#&gt; $ municipality_code &lt;int&gt; 1100015, 1100015, 1100015, 1100015, 1100015, 1100…\n#&gt; $ municipality      &lt;chr&gt; \"Alta Floresta D'Oeste\", \"Alta Floresta D'Oeste\",…\n#&gt; $ sex               &lt;fct&gt; male, male, male, male, male, male, male, male, m…\n#&gt; $ age               &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,…\n#&gt; $ n                 &lt;int&gt; 158, 159, 161, 163, 168, 176, 176, 172, 174, 178,…"
+  },
+  {
+    "objectID": "index.html#data-dictionary",
+    "href": "index.html#data-dictionary",
+    "title": "",
+    "section": "Data Dictionary",
+    "text": "Data Dictionary\n\nCodemetadata &lt;-\n  data |&gt;\n  labelled::`var_label&lt;-`(\n    list(\n      year = \"Year of the population estimate\",\n      region_code = \"IBGE code of the region\",\n      region = \"Name of the region\",\n      state_code = \"IBGE code of the state\",\n      state = \"Name of the state\",\n      federal_unit = \"Name of the federal unit\",\n      municipality_code = \"IBGE code of the municipality\",\n      municipality = \"Name of the municipality\",\n      sex = \"Sex of the population\",\n      age = \"Age of the population\",\n      n = \"Population estimate\"\n    )\n  ) |&gt;\n  labelled::generate_dictionary(details = \"full\") |&gt;\n  # labelled::lookfor_to_long_format() |&gt;\n  labelled::convert_list_columns_to_character()\n\n\n\nCodemetadata\n\n\n  \n\n\n\n\nCodedata"
+  },
+  {
+    "objectID": "index.html#saving-the-valid-data",
+    "href": "index.html#saving-the-valid-data",
+    "title": "",
+    "section": "Saving the Valid Data",
+    "text": "Saving the Valid Data\n\nCodevalid_file_pattern &lt;- paste0(\"valid-\", year)\n\n\nData\n\nCodedata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(valid_file_pattern, \".csv\"))\n  )\n\n\n\nCodedata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(valid_file_pattern, \".rds\"))\n  )\n\n\nMetadata\n\nCodemetadata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(valid_file_pattern, \"-metadata\", \".csv\"))\n  )\n\n\n\nCodemetadata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(valid_file_pattern, \"-metadata\", \".rds\"))\n  )"
+  },
+  {
+    "objectID": "index.html#visualizing-the-data",
+    "href": "index.html#visualizing-the-data",
+    "title": "",
+    "section": "Visualizing the Data",
+    "text": "Visualizing the Data\n\nCodebrand_div_palette &lt;- function(x) {\n  brandr:::make_color_ramp(\n    n_prop = x,\n    colors = c(\n      brandr::get_brand_color(\"dark-red\"),\n      # brandr::get_brand_color(\"white\"),\n      brandr::get_brand_color_mix(\n        position = 950,\n        color_1 = \"dark-red\",\n        color_2 = \"dark-red-triadic-blue\",\n        alpha = 0.5\n      ),\n      brandr::get_brand_color(\"dark-red-triadic-blue\")\n    )\n  )\n}\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_hist(\n    col = \"n\",\n    density_line_color = \"red\",\n    x_label = \"Population estimate\",\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n\n\n\n\n\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_brazil_municipality(\n    col_fill = \"n\",\n    col_code = \"municipality_code\",\n    year = plotr:::get_closest_geobr_year(year, type = \"municipality\"),\n    comparable_areas = FALSE,\n    reverse = FALSE,\n    transform = \"log10\",\n    palette = brand_div_palette,\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n#&gt; ! The closest map year to 2024 is 2022. Using year 2022 instead.\n#&gt; Scale on map varies by more than 10%, scale bar may be inaccurate"
+  },
+  {
+    "objectID": "index.html#how-to-cite",
+    "href": "index.html#how-to-cite",
+    "title": "",
+    "section": "How to Cite",
+    "text": "How to Cite\nTo cite this work, please use the following format:\nVartanian, D., & Carvalho, A. M. (2025). A reproducible R pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024) [Report]. Sustentarea Research and Extension Group at the University of São Paulo. https://sustentarea.github.io/datasus-pop-estimates\nA BibTeX entry for LaTeX users is\n@techreport{vartanian2025,\n  title = {A reproducible R pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024)},\n  author = {{Daniel Vartanian} and {Aline Martins de Carvalho}},\n  year = {2025},\n  address = {São Paulo},\n  institution = {Sustentarea Research and Extension Group at the University of São Paulo},\n  langid = {en},\n  url = {https://sustentarea.github.io/datasus-pop-estimates}\n}"
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "",
+    "section": "License",
+    "text": "License\n\n\n\nThe content is licensed under CC0 1.0 Universal, placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution."
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "",
+    "section": "References",
+    "text": "References\n\n\nAllaire, J. J., Teague, C., Xie, Y., & Dervieux, C. (n.d.). Quarto [Computer software]. Zenodo. https://doi.org/10.5281/ZENODO.5960048\n\n\nComitê de Gestão de Indicadores, Rede Interagencial de Informações para a Saúde, Coordenação-Geral de Informações e Análises Epidemiológicas, Secretaria de Vigilância em Saúde e Ambiente, Ministério da Saúde, & Instituto Brasileiro de Geografia e Estatística. (2025). População residente – Estudo de estimativas populacionais por município, idade e sexo 2000-2024 – Brasil [Resident population – Study of population estimates by municipality, age, and sex, 2000–2024 – Brazil] [Data set]. DATASUS - Tabnet. http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def\n\n\nR Core Team. (n.d.). R: A language and environment for statistical computing [Computer software]. R Foundation for Statistical Computing. https://www.R-project.org\n\n\nWickham, H. (2023). The tidy tools manifesto. Tidyverse. https://tidyverse.tidyverse.org/articles/manifesto.html\n\n\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for data science: Import, tidy, transform, visualize, and model data (2nd ed.). O’Reilly Media. https://r4ds.hadley.nz"
+  }
+]

@@ -1,0 +1,1 @@
+Sitemap: https://sustentarea.github.io/datasus-pop-estimates/sitemap.xml

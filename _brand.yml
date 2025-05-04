@@ -1,0 +1,70 @@
+meta:
+  name:
+    short: Sustentarea
+    full: Sustentarea Research and Extension Group
+  link:
+    home: https://www.fsp.usp.br/sustentarea
+    github: https://github.com/sustentarea
+    instagram: https://instagram.com/sustentarea
+    facebook: https://www.facebook.com/sustentarea
+    spotify: https://open.spotify.com/show/0loUt1qoEsko66pW6hwd05
+    youtube: https://www.youtube.com/@sustentareausp
+    linkedin: https://www.linkedin.com/in/sustentarea-usp-230700218
+    linktree: https://linktr.ee/sustentarea.usp
+  description: |
+    Research and Extension Center at the University of São Paulo
+    (USP) dedicated to advancing scientific research in food systems,
+    sustainable eating, and the global syndemic. 🍏🥦🌍
+  founded: 2012
+
+color:
+  palette:
+    green: "#006909"
+    red: "#ED6B4D"
+    red-750: "#F5B4A5"
+    brown: "#513024"
+    brown-750: "#A79791"
+    light-green: "#9ECD7A"
+    dark-red: "#B44522"
+    dark-red-triadic-blue: "#4522B4" # colortools::triadic("#B44522")[3]
+    white: "#FFFFFF"
+    grey: "#7A7A7A"
+    grey-950: "#F1F1F1"
+    grey-975: "#F8F8F8" # get_brand_color_tint(950, "grey")
+    black: "#272B33"
+  background: white
+  primary: green
+  secondary: red
+  tertiary: brown
+  success: light-green
+  info: green
+  warning: dark-red
+  danger: brown
+  light: white
+  dark: black
+
+typography:
+  fonts:
+    - family: Poppins
+      source: google
+    - family: DM Mono
+      source: google
+  base:
+    family: Poppins
+    size: 0.9rem
+    line-height: 2
+    weight: normal
+  headings:
+    family: Poppins
+    color: brown
+    line-height: 2
+    weight: bold
+  monospace: DM Mono
+  monospace-inline:
+    color: green
+    background-color: grey-975
+  monospace-block:
+    background-color: grey-975
+  link:
+    color: green
+    decoration: underline

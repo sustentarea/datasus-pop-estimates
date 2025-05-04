@@ -1,0 +1,122 @@
+/*-- scss:defaults --*/
+
+$toc-font-size: 0.9em !default;
+
+$content-padding-top: 0.5rem;
+
+$callout-color-note: #006909;
+$callout-color-tip: #006909;
+$callout-color-caution: #B44522;
+$callout-color-warning: #B44522;
+$callout-color-important: #B44522;
+
+/*-- scss:rules --*/
+
+/* Body ----- */
+
+body {
+  color: $brand-grey;
+}
+
+/* Navigation ----- */
+
+.sidebar nav[role=doc-toc] ul>li>a.active,
+.sidebar nav[role=doc-toc] ul>li>ul>li>a.active {
+  color: $brand-black !important;
+}
+
+div.sidebar-item-container a:hover {
+  color: $brand-black !important;
+}
+
+div.sidebar-item-container .active {
+  font-weight: bold;
+}
+
+.bi-github {
+  color: $brand-white;
+}
+
+/* Headings ----- */
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1
+.header-section-number {
+  color: $tertiary;
+  font-weight: bold;
+}
+
+/* Blockquote ----- */
+
+.blockquote {
+  color: $tertiary;
+}
+
+/* Code ----- */
+
+code a:any-link {
+  text-decoration: underline;
+  text-decoration-color: $primary;
+}
+
+.code-tools-button {
+  color: $brand-black;
+}
+
+/* Figures ----- */
+
+figure.figure {
+  text-align: center;
+}
+
+/* Captions ----- */
+
+.panel-caption, .figure-caption, .subfigure-caption, .table-caption,
+figcaption, caption {
+  color: $tertiary;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.quarto-float-caption-top {
+  font-size: .9rem;
+  color: $brand-black;
+  margin-bottom: 2em;
+}
+
+.legend {
+  font-size: .9rem;
+  color: $brand-black;
+}
+
+/* Colors ----- */
+
+.red {
+  color: red;
+}
+
+.brand-green {
+  color: $brand-green;
+}
+
+.brand-red {
+  color: $brand-red;
+}
+
+.brand-brown {
+  color: $brand-brown;
+}
+
+.brand-brown-750 {
+  color: $brand-brown-750;
+}
+
+.brand-grey {
+  color: $brand-grey;
+}
+
+/* Others ----- */
+
+.center-x {
+  display: inline-block;
+  text-align: center;
+}
