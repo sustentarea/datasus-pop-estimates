@@ -84,10 +84,6 @@ library(ggplot2)
 
 ## Setting the Initial Variables
 
-::: {.callout-note}
-If you need data for additional years, simply run this pipeline within a loop over the desired years.
-:::
-
 ```{r}
 #| code-fold: false
 
@@ -311,11 +307,11 @@ data
 
 ## Saving the Valid Data
 
+### Data
+
 ```{r}
 valid_file_pattern <- paste0("valid-", year)
 ```
-
-### Data
 
 ```{r}
 data |>
@@ -334,16 +330,20 @@ data |>
 ### Metadata
 
 ```{r}
+metadata_file_pattern <- paste0("metadata-", year)
+```
+
+```{r}
 metadata |>
   readr::write_csv(
-    here::here("data", paste0(valid_file_pattern, "-metadata", ".csv"))
+    here::here("data", paste0(metadata_file_pattern, ".csv"))
   )
 ```
 
 ```{r}
 metadata |>
   readr::write_rds(
-    here::here("data", paste0(valid_file_pattern, "-metadata", ".rds"))
+    here::here("data", paste0(metadata_file_pattern, ".rds"))
   )
 ```
 
@@ -369,21 +369,14 @@ osfr::osf_upload(
   path = c(
     here::here("data", paste0(valid_file_pattern, ".csv")),
     here::here("data", paste0(valid_file_pattern, ".rds")),
-    here::here("data", paste0(valid_file_pattern, "-metadata", ".csv")),
-    here::here("data", paste0(valid_file_pattern, "-metadata", ".rds"))
+    here::here("data", paste0(metadata_file_pattern, ".csv")),
+    here::here("data", paste0(metadata_file_pattern, ".rds"))
   ),
   conflicts = "overwrite"
 )
 ```
 
 ## Visualizing the Data
-
-```{r}
-#| eval: false
-#| include: false
-
-grDevices::dev.off()
-```
 
 ```{r}
 brand_div_palette <- function(x) {
@@ -447,6 +440,13 @@ data |>
     subtitle = paste0("Year: ", year),
     caption = "Source: DATASUS/IBGE"
   )
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+grDevices::dev.off()
 ```
 
 ## How to Cite

@@ -32,7 +32,7 @@
     "href": "index.html#setting-the-initial-variables",
     "title": "",
     "section": "Setting the Initial Variables",
-    "text": "Setting the Initial Variables\n\n\n\n\n\n\nIf you need data for additional years, simply run this pipeline within a loop over the desired years.\n\n\n\n\nyear &lt;- 2024"
+    "text": "Setting the Initial Variables\n\nyear &lt;- 2024"
   },
   {
     "objectID": "index.html#downloading-the-data",
@@ -95,7 +95,7 @@
     "href": "index.html#saving-the-valid-data",
     "title": "",
     "section": "Saving the Valid Data",
-    "text": "Saving the Valid Data\n\nCodevalid_file_pattern &lt;- paste0(\"valid-\", year)\n\n\nData\n\nCodedata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(valid_file_pattern, \".csv\"))\n  )\n\n\n\nCodedata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(valid_file_pattern, \".rds\"))\n  )\n\n\nMetadata\n\nCodemetadata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(valid_file_pattern, \"-metadata\", \".csv\"))\n  )\n\n\n\nCodemetadata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(valid_file_pattern, \"-metadata\", \".rds\"))\n  )"
+    "text": "Saving the Valid Data\nData\n\nCodevalid_file_pattern &lt;- paste0(\"valid-\", year)\n\n\n\nCodedata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(valid_file_pattern, \".csv\"))\n  )\n\n\n\nCodedata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(valid_file_pattern, \".rds\"))\n  )\n\n\nMetadata\n\nCodemetadata_file_pattern &lt;- paste0(\"metadata-\", year)\n\n\n\nCodemetadata |&gt;\n  readr::write_csv(\n    here::here(\"data\", paste0(metadata_file_pattern, \".csv\"))\n  )\n\n\n\nCodemetadata |&gt;\n  readr::write_rds(\n    here::here(\"data\", paste0(metadata_file_pattern, \".rds\"))\n  )"
   },
   {
     "objectID": "index.html#visualizing-the-data",
