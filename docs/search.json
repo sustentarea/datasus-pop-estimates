@@ -4,21 +4,21 @@
     "href": "index.html#overview",
     "title": "",
     "section": "Overview",
-    "text": "Overview\nThis report provides a reproducible pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions."
+    "text": "Overview\nThis report provides a reproducible pipeline for processing DATASUS annual population estimates by municipality, age, and sex in Brazil (2000-2024). The main goal is to provide an open and reliable workflow for processing these data, supporting research and informed public policy decisions."
   },
   {
     "objectID": "index.html#data-availability",
     "href": "index.html#data-availability",
     "title": "",
     "section": "Data Availability",
-    "text": "Data Availability\nThe processed data are available in both csv and rds formats via a dedicated repository on the Open Science Framework (OSF), accessible here. A metadata file is included alongside the validated data. You can also access these files directly from R using the osfr package.\nA backup copy of the raw data is also available in OSF. You can access it here."
+    "text": "Data Availability\n\n\n\nThe processed data are available in both csv and rds formats via a dedicated repository on the Open Science Framework (OSF), accessible here. A metadata file is included alongside the validated data. You can also access these files directly from R using the osfr package.\nA backup copy of the raw data is also available in OSF. You can access it here."
   },
   {
     "objectID": "index.html#methods",
     "href": "index.html#methods",
     "title": "",
     "section": "Methods",
-    "text": "Methods\nSource of Data\nThe data used in this report were sourced from the DATASUS platform, which provides annual population estimates for Brazil by municipality, age, and sex for the period 2000–2024 (Comitê de Gestão de Indicadores et al., n.d.). These estimates are produced using data by the Brazilian Institute of Geography and Statistics (IBGE).\nFor technical information about the raw dataset, see the official technical note (in Portuguese).\nData Munging\nThe data munging followed the data science workflow outlined by Wickham et al. (2023), as illustrated in Figure 1. All processes were made using the Quarto publishing system (Allaire et al., n.d.), the R programming language (R Core Team, n.d.) and several R packages.\nThe tidyverse and rOpenSci peer-reviewed package ecosystem and other R packages adherents of the tidy tools manifesto (Wickham, 2023) were prioritized. All processes were made in order to provide result transparency and reproducibility.\n\n\nFigure 1: Data science workflow created by Wickham, Çetinkaya-Runde, and Grolemund.\n\n\nSource: Reproduced from Wickham et al. (2023).\n\n\n\nCode Style\nThe Tidyverse code style guide and design principles were followed to ensure consistency and enhance readability.\nReproducibility\nThe pipeline is fully reproducible and can be run again at any time. See the README file in the code repository to learn how to run them."
+    "text": "Methods\nSource of Data\nThe data used in this report were sourced from the Department of Informatics of the Brazilian Unified Health System (DATASUS) platform, which provides annual population estimates for Brazil by municipality, age, and sex for the period 2000–2024 (Comitê de Gestão de Indicadores et al., n.d.). These estimates are produced using data by the Brazilian Institute of Geography and Statistics (IBGE).\nFor technical information about the raw dataset, see the official technical note (in Portuguese).\nData Munging\nThe data munging followed the data science workflow outlined by Wickham et al. (2023), as illustrated in Figure 1. All processes were made using the Quarto publishing system (Allaire et al., n.d.), the R programming language (R Core Team, n.d.) and several R packages.\nThe tidyverse and rOpenSci peer-reviewed package ecosystem and other R packages adherents of the tidy tools manifesto (Wickham, 2023) were prioritized. All processes were made in order to provide result transparency and reproducibility.\n\n\nFigure 1: Data science workflow created by Wickham, Çetinkaya-Runde, and Grolemund.\n\n\nSource: Reproduced from Wickham et al. (2023).\n\n\n\nCode Style\nThe Tidyverse code style guide and design principles were followed to ensure consistency and enhance readability.\nReproducibility\nThe pipeline is fully reproducible and can be run again at any time. See the README file in the code repository to learn how to run it."
   },
   {
     "objectID": "index.html#setting-the-environment",
@@ -88,7 +88,7 @@
     "href": "index.html#data-dictionary",
     "title": "",
     "section": "Data Dictionary",
-    "text": "Data Dictionary\n\nCodemetadata &lt;-\n  data |&gt;\n  labelled::`var_label&lt;-`(\n    list(\n      year = \"Year of the population estimate\",\n      region_code = \"IBGE code of the region\",\n      region = \"Name of the region\",\n      state_code = \"IBGE code of the state\",\n      state = \"Name of the state\",\n      federal_unit = \"Name of the federal unit\",\n      municipality_code = \"IBGE code of the municipality\",\n      municipality = \"Name of the municipality\",\n      sex = \"Sex of the population\",\n      age = \"Age of the population\",\n      n = \"Population estimate\"\n    )\n  ) |&gt;\n  labelled::generate_dictionary(details = \"full\") |&gt;\n  labelled::convert_list_columns_to_character()\n\n\n\nCodemetadata\n\n\n  \n\n\n\n\nCodedata"
+    "text": "Data Dictionary\n\nCodemetadata &lt;-\n  data |&gt;\n  labelled::`var_label&lt;-`(\n    list(\n      year = \"Year of the population estimate\",\n      region_code = \"IBGE region code\",\n      region = \"Region name\",\n      state_code = \"IBGE state code\",\n      state = \"State name\",\n      federal_unit = \"Federal unit name\",\n      municipality_code = \"IBGE municipality code\",\n      municipality = \"Municipality name\",\n      sex = \"Sex of the population\",\n      age = \"Age of the population\",\n      n = \"Population estimate\"\n    )\n  ) |&gt;\n  labelled::generate_dictionary(details = \"full\") |&gt;\n  labelled::convert_list_columns_to_character()\n\n\n\nCodemetadata\n\n\n  \n\n\n\n\nCodedata"
   },
   {
     "objectID": "index.html#saving-the-valid-data",
@@ -105,13 +105,6 @@
     "text": "Visualizing the Data\n\nCodebrand_div_palette &lt;- function(x) {\n  brandr:::make_color_ramp(\n    n_prop = x,\n    colors = c(\n      brandr::get_brand_color(\"dark-red\"),\n      # brandr::get_brand_color(\"white\"),\n      brandr::get_brand_color_mix(\n        position = 950,\n        color_1 = \"dark-red\",\n        color_2 = \"dark-red-triadic-blue\",\n        alpha = 0.5\n      ),\n      brandr::get_brand_color(\"dark-red-triadic-blue\")\n    )\n  )\n}\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_hist(\n    col = \"n\",\n    density_line_color = \"red\",\n    x_label = \"Population estimate\",\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n\n\n\n\n\n\n\n\nCodedata |&gt;\n  dplyr::summarize(\n    n = sum(n, na.rm = TRUE),\n    .by = c(\"municipality_code\")\n  ) |&gt;\n  plotr:::plot_brazil_municipality(\n    col_fill = \"n\",\n    col_code = \"municipality_code\",\n    year = plotr:::get_closest_geobr_year(year, type = \"municipality\"),\n    comparable_areas = FALSE,\n    reverse = FALSE,\n    transform = \"log10\",\n    palette = brand_div_palette,\n    print = FALSE\n  ) +\n  ggplot2::labs(\n    title = \"Population Estimates by Municipality in Brazil\",\n    subtitle = paste0(\"Year: \", year),\n    caption = \"Source: DATASUS/IBGE\"\n  )\n#&gt; ! The closest map year to 2024 is 2022. Using year 2022 instead.\n#&gt; Scale on map varies by more than 10%, scale bar may be inaccurate"
   },
   {
-    "objectID": "index.html#acknowledgments",
-    "href": "index.html#acknowledgments",
-    "title": "",
-    "section": "Acknowledgments",
-    "text": "Acknowledgments\n\nThis work is part of the Sustentarea Research and Extension Group’s project: Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil’s public health system (SUS).\n\nThis work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brazil (CNPq)."
-  },
-  {
     "objectID": "index.html#how-to-cite",
     "href": "index.html#how-to-cite",
     "title": "",
@@ -124,6 +117,13 @@
     "title": "",
     "section": "License",
     "text": "License\n\n\n\nThis content is licensed under CC0 1.0 Universal, placing these materials in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution."
+  },
+  {
+    "objectID": "index.html#acknowledgments",
+    "href": "index.html#acknowledgments",
+    "title": "",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\n\nThis work is part of the Sustentarea Research and Extension Group project: Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil’s public health system (SUS).\n\nThis work was supported by the Conselho Nacional de Desenvolvimento Científico e Tecnológico - Brazil (CNPq)."
   },
   {
     "objectID": "index.html#references",

@@ -2,18 +2,19 @@
 
 <!-- badges: start -->
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://img.shields.io/badge/Repo%20Status-Inactive-A6A82D.svg)](https://www.repostatus.org/#inactive)
-[![OSF
-DOI](https://img.shields.io/badge/OSF-10.17605/OSF.IO/UCMS6-1284C5.svg)](https://doi.org/10.17605/OSF.IO/UCMS6)
+[![OSF DOI](https://img.shields.io/badge/OSF-10.17605/OSF.IO/UCMS6-1284C5.svg)](https://doi.org/10.17605/OSF.IO/UCMS6)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 <!-- badges: end -->
 
 ## Overview
 
-This repository provides a reproducible pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., n.d.](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide a transparent and reliable workflow for processing these data, supporting research and informed public policy decisions.
+This repository provides a reproducible pipeline for processing [DATASUS](https://datasus.saude.gov.br/) annual population estimates by municipality, age, and sex in Brazil (2000-2024) ([Comitê de Gestão de Indicadores et al., n.d.](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvs2024br.def)). The main goal is to provide an open and reliable workflow for processing these data, supporting research and informed public policy decisions.
 
 You can access the pipeline [here](https://sustentarea.github.io/datasus-pop-estimates/).
 
 ## Data Availability
+
+[![OSF DOI](https://img.shields.io/badge/OSF-10.17605/OSF.IO/UCMS6-1284C5.svg)](https://doi.org/10.17605/OSF.IO/UCMS6)
 
 The processed data are available in both `csv` and `rds` formats via a dedicated repository on the Open Science Framework ([OSF](https://osf.io/)), accessible [here](https://doi.org/10.17605/OSF.IO/UCMS6). A metadata file is included alongside the validated data. You can also access these files directly from R using the [`osfr`](https://docs.ropensci.org/osfr/) package.
 
@@ -21,7 +22,7 @@ A backup copy of the raw data is also available in OSF. You can access it [here]
 
 ## How to Use
 
-The pipeline is fully reproducible. It was developed using the [Quarto](https://quarto.org/) publishing system and the [R programming language](https://www.r-project.org/). To ensure consistent results, the [`renv`](https://rstudio.github.io/renv/) package is used to manage and restore the R environment (see `renv.lock` for details).
+The pipeline is fully reproducible. It was developed using the [Quarto](https://quarto.org/) publishing system and the [R programming language](https://www.r-project.org/). To ensure consistent results, the [`renv`](https://rstudio.github.io/renv/) package is used to manage and restore the R environment.
 
 After installing the three dependencies mentioned above, follow these steps to reproduce the analyses:
 
@@ -68,7 +69,7 @@ This content is licensed under [CC0 1.0 Universal](https://creativecommons.org/p
       <br>
     </td>
     <td width="70%">
-      This work is part of the <a href="https://www.fsp.usp.br/sustentarea">Sustentarea</a> Research and Extension Group's project: <em>Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil's public health system (SUS)</em>.
+      This work is part of the <a href="https://www.fsp.usp.br/sustentarea">Sustentarea</a> Research and Extension Group project: <em>Global syndemic: The impact of anthropogenic climate change on the health and nutrition of children under five years old attended by Brazil's public health system (SUS)</em>.
     </td>
   </tr>
 </table>
